@@ -6,7 +6,7 @@ export default class Viewimage extends Component
     state={
         load:true
     }
-    onload=()=>
+    onLoadEnd=()=>
     {
         this.setState({load:false})
     }
@@ -16,7 +16,7 @@ export default class Viewimage extends Component
         return(
             <View style={styles.container}>
             <Image style={styles.imageview}
-            onload1={this.onload}
+            onload1={this.onLoadEnd}
             source={{uri:'https://www.google.com/search?q=hd+images+download&sxsrf=AOaemvJwg44gydgW9tj5YXA4mF7n63zdUA:1633581040069&source=lnms&tbm=isch&sa=X&sqi=2&ved=2ahUKEwjM8-rMu7fzAhXaqZUCHfzzAWkQ_AUoAXoECAEQAw&biw=1299&bih=669&dpr=1#imgrc=Qv6K7pIzJsF94M'}}/>
             <ActivityIndicator 
             size='large' color="#000"
