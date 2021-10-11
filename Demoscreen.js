@@ -9,8 +9,8 @@ const Demoscreen=({navigation})=>
     return(
         <SafeAreaView>
         <View>
-            <Text style={styles.txt}>Hey this is homescreen</Text>
-            <Button onPress={()=>navigation.navigate('Home')} title="Go to demo screen"></Button>
+            <Text style={styles.txt}>Hey this is demoscreen</Text>
+            <Button onPress={()=>navigation.navigate('Home')} title="Go to home screen"></Button>
         </View>
         </SafeAreaView>
     )
