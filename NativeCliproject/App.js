@@ -54,6 +54,9 @@ function App() {
       /> 
       <Tab.Screen name="Account" component={Account}
       options={{
+        headerTitle:'My Application',
+        title:'Account',
+        headerShown:false,
       tabBarIcon:({focused})=>(
         <Image source={require('./assets/images/ttn4.png')}
         style={{

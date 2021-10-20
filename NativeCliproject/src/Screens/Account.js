@@ -1,32 +1,160 @@
-import React, { useState } from "react";
-import {View,Text,StyleSheet, TouchableOpacity,
-Dimensions,Image, FlatList, ScrollView,Modal, TextInput} from "react-native";
-
-
-import Cards from "./Cards";
-
-
+import React, {useState}from 'react';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar,TouchableOpacity,Dimensions,Image,Modal,TextInput } from 'react-native';
 const{width,height}=Dimensions.get('window');
+import Join from '../Components/Join';
 
-const Account=(navigation)=>
-{
-    const[modalopen,setmodalopen]=useState(false);
-    const[modalopen1,setmodalopen2]=useState(false);
+import {
+trackorder,
+    chart,
+    notifications,
+    locator
+    ,globe
+    ,lang
+    ,about
+    ,Ques
+    ,shipping
+    ,chat
+    ,star
+    ,share
+    ,privacy
+    ,terms
+    ,send}
+ from '../Screens/imagees1';
 
-    return(
-        <ScrollView>
-        <View style={styles.container}>
-                  <Text style={styles.txt}>Welcome!</Text>
+
+const DATA = [
+        {
+            id:1,
+            title:'Track Order',
+            icons:'trackorder'
+        },
+        {
+            id:2,
+            title:'Size Chart',
+            icons:'chart'
+        },
+        {
+            id:3,
+            title:'Notifications',
+            icons:'notifications'
+        },
+        {
+            id:4,
+            title:'Store Locator',
+            icons:'locator'
+        },
+    ];
+const Data2=[
+        {
+            id:1,
+            title:'Country',
+            icons:'globe'
+        },
+        {
+            id:2,
+            title:'Language',
+            icons:'lang'
+        },
+        {
+            id:3,
+            title:'About Us',
+            icons:'about'
+        },
+        {
+            id:4,
+            title:'FAQ',
+            icons:'Ques'
+        },
+        {
+            id:5,
+            title:'Shipping & Returns',
+            icons:'shipping'
+        },
+        {
+            id:6,
+            title:'Chat With Us',
+            icons:'chat'
+        },
+        {
+            id:7,
+            title:'Rate Application',
+            icons:'star'
+        },
+        {
+            id:8,
+            title:'Share Application',
+            icons:'share'
+        },
+        {
+            id:9,
+            title:'Privacy Policy',
+            icons:'privacy'
+        },
+        {
+            id:10,
+            title:'Terms & Conditions',
+            icons:'terms'
+        },
+        {
+            id:11,
+            title:'Send Email',
+            icons:'send'
+        },
+    ];
+    
+const Item = ({ title }) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
+const Item2 = ({ title }) => (
+    <View style={styles.item}>
+      <Text style={styles.title}>{title}</Text>
+    </View>
+  );
+
+const Account = () => {
+  const renderItem = ({ item }) => (
+    <Item title={item.title}  />
+  );
+  const renderData = ({ item }) => (
+    <Item2 title={item.title}
+             />
+  );
+  const[modalopen,setmodalopen]=useState(false);
+  const[modalopen1,setmodalopen1]=useState(false);
+
+  return (
+    <SafeAreaView style={styles.container}>
+    <View  style={styles.viewcontainer}>
+                <Text style={styles.txt}>Welcome!</Text>
                   <View style={styles.container2}>
                   <TouchableOpacity onPress={()=>setmodalopen(true)}>
                       <Text>SIGNIN</Text>
                   </TouchableOpacity>
                   <View style={styles.line}/>
-                  <TouchableOpacity onPress={()=>setmodalopen2(true)}>
+                  <TouchableOpacity onPress={()=>setmodalopen1(true)}>
                       <Text>JOIN</Text>
                   </TouchableOpacity>
                   </View>
                 <View style={styles.line2}/>
+    </View>
+    <View style={styles.list1}>
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
+      </View>
+      <View style={styles.line3}/>
+      <FlatList
+        data={Data2}
+        renderItem={renderData}
+        keyExtractor={item => item.id}
+      />
+      <View style={styles.container4}>
+                <Text style={{color:'#888'}}>App Version4.0.6(1)</Text>
+        </View>
         <Modal visible={modalopen}animationType='slide'>
         <View style={styles.modalcontainer}>
         <View style={styles.mod}>
@@ -79,153 +207,25 @@ const Account=(navigation)=>
         </TouchableOpacity>
          </View>
         </Modal>
-
-        <Modal visible={modalopen1}animationType='slide'>
-        <View style={styles.modalcontainer}>
-        <View style={styles.mod}>
-                  <TouchableOpacity onPress={()=>setmodalopen2(false)}>
-                      <Image source={require('./imagees1/cross.png')}/>
-                  </TouchableOpacity>
-        </View>
-        <TextInput style={styles.modalinput}
-         placeholder="First Name">
-        </TextInput>
-        <TextInput style={styles.modalinput}
-         placeholder="Last Name"
-         keyboardType="name-phone-pad">
-        </TextInput>
-        <TextInput style={styles.modalinput}
-         placeholder="Your Email"
-         keyboardType="name-phone-pad">
-        </TextInput>
-        <TextInput style={styles.modalinput}
-         placeholder="Password"
-         keyboardType="name-phone-pad">
-        </TextInput>
-        </View>
-        <View style={styles.modalcontainer8}>
-            <TouchableOpacity>
-                <Text style={{color:'white'}}>Join now</Text>
-            </TouchableOpacity>
-        </View>
-
-        <View style={styles.line6}/>
-        <View style={styles.modalcontainer4}>
-        <TouchableOpacity style={styles.modaltouch}>
-            <Image source={require('./imagees1/google.png')}/>
-            <Text style={styles.modaltxt}>Sign in with Google</Text>
-        </TouchableOpacity>
-        </View>
-        <View style={styles.modalcontainer5}>
-        <TouchableOpacity style={styles.modaltouch}>
-            <Image source={require('./imagees1/fb.png')}/>
-            <Text style={styles.modaltxt1}>Sign in with Facebbok</Text>
-        </TouchableOpacity>
-         </View>
-         <View style={styles.modalcontainer6}>
-        <TouchableOpacity style={styles.modaltouch}>
-            <Image source={require('./imagees1/apple3.png')}/>
-            <Text style={styles.modaltxt1}>Sign in with Apple</Text>
-        </TouchableOpacity>
-         </View>
-        </Modal>
-
-
         
+        <Join/>
         
-        
-                <Cards img={require('./imagees1/trackorder.png')} 
-                    cardstxt="Track Order"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/chart.png')} 
-                    cardstxt="Size Chart"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/notifications.png')} 
-                    cardstxt="Notification"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/locator.png')} 
-                    cardstxt="Store locate"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line4}/>
 
-                <Cards img={require('./imagees1/globe.png')} 
-                    cardstxt="Country"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/lang.png')} 
-                    cardstxt="Langugae"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/about.png')} 
-                    cardstxt="About us"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/Ques.png')} 
-                    cardstxt="FAQ"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/shipping.png')} 
-                    cardstxt="Shipping & Returns"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/chat.png')} 
-                    cardstxt="Chat With Us"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/star.png')} 
-                    cardstxt="Rate Application"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/share.png')} 
-                    cardstxt="Share Application"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/privacy.png')} 
-                    cardstxt="Privacy Policy"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/terms.png')} 
-                    cardstxt="Terms & Conditions"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.line3}/>
-                <Cards img={require('./imagees1/send.png')} 
-                    cardstxt="Send Email"
-                    img1={require('./imagees1/greater.png')}
-                />
-                <View style={styles.container4}>
-                <Text style={{color:'#888'}}>App Version4.0.6(1)</Text>
-                </View>
-        </View>
-
-        </ScrollView>
-
-    )
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    container:
-    {
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  viewcontainer:
+  {
        height:height/9.5,
        padding:20,
-    },
-    txt:
+  },
+  txt:
     {
         fontWeight:'600',
         fontSize:20,
@@ -251,16 +251,22 @@ const styles = StyleSheet.create({
         borderBottomColor:'#d3d3d3',
         paddingTop:15
     },
-    line4:
+  item: {
+    backgroundColor: 'white',
+    padding: 20,
+    marginVertical: 1,
+    marginHorizontal: 6,
+  },
+  title: {
+    fontSize: 15,
+    fontWeight:'500'
+  },
+  line3:
     {
         borderBottomWidth:7,
         borderBottomColor:'#d3d3d3',
-        paddingTop:6
-    },
-    line3:
-    {
-        borderBottomWidth:1,
-        borderBottomColor:'#d3d3d3',
+        marginHorizontal:18,
+        marginBottom:3
     },
     container4:
     {
@@ -363,25 +369,17 @@ const styles = StyleSheet.create({
         borderColor:'#888'
         
     },
-    modaltouch1:
-    {
-        marginHorizontal:15
-    },
     mod:
     {
         paddingBottom:10,
         marginHorizontal:270
-    } ,
-    modalcontainer8:
+    },
+    modaltxt2:
     {
-        padding:20,
-        justifyContent:'center',
-        alignItems:'center',
-        borderWidth:1,
-        width:width/1.2,
-        backgroundColor:'#000',
-        marginHorizontal:30
-    }
+        marginHorizontal:20
+    },
+    
+
 });
 
 export default Account;

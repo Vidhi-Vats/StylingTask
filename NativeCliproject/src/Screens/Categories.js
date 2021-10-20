@@ -8,7 +8,7 @@ const Categories=({navigation})=>
     return(
         <SafeAreaView>
         <View>
-            <Text style={styles.txt}>Hey this is Category screen</Text>
+            <Text style={styles.txt}></Text>
         </View>
         </SafeAreaView>
     )
