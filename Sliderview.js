@@ -10,19 +10,10 @@ class Sliderview extends Component{
         this.state={
             slidervalue:0,
             isOn:false,
-            //ishidden:false
+            
         }
     }
-    // toggle_switch=(value)=>
-    // {
-    //     if(value===true)
-    //     {
-    //         this.setState({ishidden:this.state.ishidden=false})
-    //     }
-    //     else{
-    //         this.setState({ishidden:this.state.ishidden=true})
-    //     }
-    // }
+
     
     
     render()
@@ -31,24 +22,23 @@ class Sliderview extends Component{
             <View style={styles.container}>
             <SafeAreaView>
              <View>
+             { this.state.isOn ? (
             <Slider 
             min={0}
             onValuesChange={val=>
             this.setState({
                 slidervalue:val
             })}
-            max={100}/>
-            <Text style={styles.txt}>slide value:{this.state.slidervalue}
-            </Text>
+            max={100}/>):null}
+            { this.state.isOn ? (<Text style={styles.txt}>slide value:{this.state.slidervalue}
+            </Text>):null}
             </View>
             <Switch
-            value={this.state.isOn}
             onValueChange={vals=>
             this.setState({
-                isOn:vals,
-                
-                
+                isOn:vals,    
             })}
+            value={this.state.isOn}
             thumbColor={this.state.isOn ? 'red':'black'}
             trackColor={{false: 'gery' ,true:'yellow'}}/>
             </SafeAreaView>
