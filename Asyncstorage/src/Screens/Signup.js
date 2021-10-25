@@ -3,12 +3,15 @@ import { Text,
  View ,
   SafeAreaView,
   StyleSheet,
-Dimensions,
- TextInput,
+    Dimensions,
+    TextInput,
   TouchableOpacity,
   Image,
-  Alert} from 'react-native'
+  Alert,
+KeyboardAvoidingView,
+ScrollView} from 'react-native'
   import AsyncStorage from '@react-native-async-storage/async-storage';
+  //import HomeScreen from '../Screens/HomeScreen';
 
 const{width,height}=Dimensions.get('window');
 
@@ -19,18 +22,8 @@ export default class Signup extends Component {
         phonenumber:'',
         password:'',
         confirmpassword:'',
-        Credentials:null
-    }
-
-    async componentDidMount()
-    {
-        const user=await AsyncStorage.getItem('UserValue')
-        console.log('Name',user);
-        console.log('Name',this.state.Credentials);
-        this.setState({
-            Credentials:user
-        });
-        
+        details:'',
+        setfocus:false
     }
     button_press=async()=>
     {
@@ -65,15 +58,14 @@ export default class Signup extends Component {
             };
             console.log('UserValue',JSON.stringify(user_details));
             await AsyncStorage.setItem('UserValue',JSON.stringify(user_details));
-            const user=await AsyncStorage.getItem('UserValue');
-            this.setState(
-                {
-                    Credentials:user,
-                }
-            );
-                this.props.navigation.navigate('Home',{
-                    U_name:user_details.userName,
-                    U_emailid:user_details.email
+                this.props.navigation.navigate('Home'
+                )
+                this.setState({
+                    userName:'',
+                    email:'',
+                    phonenumber:'',
+                    password:'',
+                    confirmpassword:'',
                 })
         }
     }
@@ -81,8 +73,13 @@ export default class Signup extends Component {
 
     render() {
         return (
+            
             <SafeAreaView style={styles.container}>
-            <View style={styles.container2}>
+            <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : null}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+             <View style={styles.container2}>
                 <Text style={styles.heading}>
                     Let's Get Started!
                 </Text>
@@ -127,6 +124,7 @@ export default class Signup extends Component {
                 source={require('../Screens/assets/pass.png')}/>
                 <TextInput style={styles.firstinput2}
                 placeholder="Password"
+                secureTextEntry={true}
                 value={this.state.password}
                 onChangeText={(text)=>{this.setState({password:text})
                 }}
@@ -138,6 +136,7 @@ export default class Signup extends Component {
                 source={require('../Screens/assets/pass.png')}/>
                 <TextInput style={styles.firstinput2}
                 placeholder="ConfirmPassword"
+                secureTextEntry={true}
                 value={this.state.confirmpassword}
                 onChangeText={(text)=>{this.setState({confirmpassword:text})
                 }}
@@ -159,9 +158,10 @@ export default class Signup extends Component {
                  style={styles.button2}>
                     <Text style={styles.button2txt} >Login Here</Text>
                 </TouchableOpacity>
-                {/* <Text>xyz:{this.state.userName}</Text> */}
                 </View>
             </View>
+            </ScrollView>
+            </KeyboardAvoidingView>
             </SafeAreaView>
         )
     }
@@ -183,8 +183,9 @@ const styles = StyleSheet.create({
         width:width/1.1,
         backgroundColor:'white',
         marginHorizontal:16,
-        marginVertical:10,
-        borderRadius:40
+        marginVertical:30,
+        borderRadius:40,
+        zIndex:-1
     },
     heading:
     {

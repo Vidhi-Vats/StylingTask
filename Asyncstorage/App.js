@@ -6,6 +6,9 @@ import HomeScreen from './src/Screens/HomeScreen';
 import Signup from './src/Screens/Signup';
 import Asyncstoragepractice from './src/Screens/Asyncstoragepractice';
 import AppNavigator from './src/Components/Navigation';
+// import HextoRGB from './src/Screens/HexToRGB';
+// import HEXtoRGB2 from './src/Screens/HEXtoRGB2';
+// import Screenotp from './src/Screens/Screenotp';
 
 export default class App extends Component {
   render() {
@@ -15,6 +18,7 @@ export default class App extends Component {
         {/* <HomeScreen/> */}
         {/* <Asyncstoragepractice/> */}
         <AppNavigator/>
+        
       </View>
     )
   }
