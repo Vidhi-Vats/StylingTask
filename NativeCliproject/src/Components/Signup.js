@@ -1,44 +1,35 @@
-import React, { useState } from "react";
-import {View,TextInput,TouchableOpacity,Text,StyleSheet,Dimensions,Image,Modal} 
-from "react-native"
-//import RadioForm from "react-native-simple-radio-button";
-//import CheckBoxx from "@react-native-community/checkbox";
+import React, { Component } from 'react'
+import { Text, View,StyleSheet,Dimensions,
+TextInput,TouchableOpacity,Image,
+KeyboardAvoidingView,ScrollView} from 'react-native'
 
 
-const {height,width}=Dimensions.get('window')
+const{height,width}=Dimensions.get('window');
 
-
-const Join = () => {
-    return (
-        <View>
-        
-        <View style={styles.modalcontainer}>
-        <View style={styles.mod}>
-        </View>
+export class Signup extends Component {
+    render() {
+        return (
+            <View style={styles.container}>
+            <ScrollView>
+            <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : null}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}>
             <TextInput style={styles.modalinput}
-         placeholder="First Name">
-        </TextInput>
-        <TextInput style={styles.modalinput}
-         placeholder="Last Name"
-         keyboardType="name-phone-pad">
-        </TextInput>
-        <TextInput style={styles.modalinput}
-         placeholder="Your Email"
-         keyboardType="name-phone-pad">
-        </TextInput>
-        <TextInput style={styles.modalinput}
-         placeholder="Password"
-         keyboardType="name-phone-pad">
-        </TextInput>
-        </View>
-        
-        
-        <View style={styles.modalcontainer8}>
+            placeholder="Your Email Address">
+            </TextInput>
+            <TextInput style={styles.modalinput}
+            placeholder="Password"
+            keyboardType="name-phone-pad">
+                </TextInput>
+            <View style={styles.modalcontainer2}>
+            <Text>Forgot Password?</Text>
+            </View>
+            <View style={styles.modalcontainer3}>
             <TouchableOpacity>
-                <Text style={{color:'white'}}>Join now</Text>
+                <Text style={{color:'white'}}>Sign In</Text>
             </TouchableOpacity>
-        </View>
-
+            </View>
+        
         <View style={styles.line6}/>
         <View style={styles.modalcontainer4}>
         <TouchableOpacity style={styles.modaltouch}>
@@ -58,25 +49,31 @@ const Join = () => {
             <Text style={styles.modaltxt1}>Sign in with Apple</Text>
         </TouchableOpacity>
          </View>
-         
-        </View>
-        
-    )
+
+         <View style={styles.modalcontainer7}>
+        <TouchableOpacity style={styles.modaltouch}>
+            <Text style={{color:'#888'}}>Don't have an account?</Text>
+            <TouchableOpacity style={styles.modaltouch1}>
+            <Text style={styles.modaltxt2}>join</Text>
+            </TouchableOpacity>
+        </TouchableOpacity>
+            </View>
+            </KeyboardAvoidingView>
+            </ScrollView>
+            </View>
+        )
+    }
 }
 const styles = StyleSheet.create({
-    modalcontainer:
-    {
-        paddingTop:50,
-        paddingLeft:30,
-    },
     modalinput:
     {
         borderWidth:1,
-        height:height/20,
+        height:height/16,
         width:width/1.2,
         borderColor:'#d3d3d3',
         borderRadius:2,
-        marginBottom:20
+        marginBottom:20,
+        marginLeft:30,
     },
     modalcontainer2:
     {
@@ -92,6 +89,7 @@ const styles = StyleSheet.create({
         borderWidth:1,
         width:width/1.2,
         backgroundColor:'#000',
+        marginLeft:30
         
     },
     line6:
@@ -158,85 +156,10 @@ const styles = StyleSheet.create({
         borderColor:'#888'
         
     },
-    mod:
+    container:
     {
-        paddingBottom:10,
-        marginHorizontal:270
-    } ,
-    modalcontainer8:
-    {
-        padding:20,
-        justifyContent:'center',
-        alignItems:'center',
-        borderWidth:1,
-        width:width/1.2,
-        backgroundColor:'#000',
-        marginHorizontal:30,
-        height:height/15
-    },
-    phonemain:
-    {
-        alignItems:'center',
-        marginTop:10,
-    },
-    phonecontainer:
-    {
-        flexDirection:'row',
-        width:width-30,
-        borderWidth:1,
-        borderColor:'#d9d9d9'
-    },
-    phoneview:
-    {
-        width:140,
-        flexDirection:'row',
-        justifyContent: 'center',
-        alignItems:'center'
-    },
-    phoneimage:
-    {
-        width:25,
-        height:25,
-        borderRadius:50
-    },
-    phonetext:
-    {
-        fontSize:25,
-        fontWeight:'200',
-        color:'#d9d9d9'
-    },
-    phoneinput:
-    {
-        width:width-140,
-        height:50,
-        fontSize:15
-    },
-    radiocontainer:
-    {
-        width:210,
-        height:50,
-        marginTop:10,
-        marginLeft:15,
-        justifyContent: 'center',
-    },
-    radio:
-    {
-        justifyContent:'space-between'
-    },
-    maincheckbox:
-    {
-        alignItems:'center',
-        marginVertical:10,
-    },
-    checkcontainer:
-    {
-        flexDirection:'row',
-        width:width-30
-    },
-    check:
-    {
-        height:15
+        marginTop:55
     }
 });
 
-export default Join
+export default Signup

@@ -1,7 +1,10 @@
 import React, {useState}from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar,TouchableOpacity,Dimensions,Image,Modal,TextInput } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, 
+    Text, StatusBar,TouchableOpacity,
+    Dimensions,Image,Modal,TextInput ,ScrollView} from 'react-native';
 const{width,height}=Dimensions.get('window');
 import Join from '../Components/Join';
+import Signup from '../Components/Signup';
 
 import {
 trackorder,
@@ -121,96 +124,70 @@ const Account = () => {
     <Item2 title={item.title}
              />
   );
-  const[modalopen,setmodalopen]=useState(false);
-  const[modalopen1,setmodalopen1]=useState(false);
+  const [signInModal, setSignInModal] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  
 
   return (
     <SafeAreaView style={styles.container}>
     <View  style={styles.viewcontainer}>
                 <Text style={styles.txt}>Welcome!</Text>
                   <View style={styles.container2}>
-                  <TouchableOpacity onPress={()=>setmodalopen(true)}>
-                      <Text>SIGNIN</Text>
+                  <TouchableOpacity onPress={()=>setModalVisible(true)}>
+                      <Text>SIGNIN  JOIN</Text>
                   </TouchableOpacity>
-                  <View style={styles.line}/>
-                  <TouchableOpacity onPress={()=>setmodalopen1(true)}>
-                      <Text>JOIN</Text>
-                  </TouchableOpacity>
+                  {/* <View style={styles.line}/> */}
+                  
                   </View>
                 <View style={styles.line2}/>
     </View>
-    <View style={styles.list1}>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
-      </View>
-      <View style={styles.line3}/>
-      <FlatList
-        data={Data2}
-        renderItem={renderData}
-        keyExtractor={item => item.id}
-      />
-      <View style={styles.container4}>
-                <Text style={{color:'#888'}}>App Version4.0.6(1)</Text>
+    <ScrollView>
+        <View style={styles.list1}>
+          <FlatList
+            data={DATA}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
         </View>
-        <Modal visible={modalopen}animationType='slide'>
-        <View style={styles.modalcontainer}>
-        <View style={styles.mod}>
-                  <TouchableOpacity onPress={()=>setmodalopen(false)}>
-                      <Image source={require('./imagees1/cross.png')}/>
-                  </TouchableOpacity>
+      </ScrollView>
+      <ScrollView>
+        <View style={styles.list2}>
+          <FlatList
+            data={Data2}
+            renderItem={renderData}
+            keyExtractor={item => item.id}
+          />
         </View>
-        <TextInput style={styles.modalinput}
-         placeholder="Your Email Address">
-        </TextInput>
-        <TextInput style={styles.modalinput}
-         placeholder="Password"
-         keyboardType="name-phone-pad">
-        </TextInput>
-        <View style={styles.modalcontainer2}>
-        <Text>Forgot Password?</Text>
-        </View>
-        <View style={styles.modalcontainer3}>
-            <TouchableOpacity>
-                <Text style={{color:'white'}}>Sign In</Text>
-            </TouchableOpacity>
-        </View>
-        </View>
-        <View style={styles.line6}/>
-        <View style={styles.modalcontainer4}>
-        <TouchableOpacity style={styles.modaltouch}>
-            <Image source={require('./imagees1/google.png')}/>
-            <Text style={styles.modaltxt}>Sign in with Google</Text>
-        </TouchableOpacity>
-        </View>
-        <View style={styles.modalcontainer5}>
-        <TouchableOpacity style={styles.modaltouch}>
-            <Image source={require('./imagees1/fb.png')}/>
-            <Text style={styles.modaltxt1}>Sign in with Facebbok</Text>
-        </TouchableOpacity>
-         </View>
-         <View style={styles.modalcontainer6}>
-        <TouchableOpacity style={styles.modaltouch}>
-            <Image source={require('./imagees1/apple3.png')}/>
-            <Text style={styles.modaltxt1}>Sign in with Apple</Text>
-        </TouchableOpacity>
-         </View>
+      </ScrollView>
 
-         <View style={styles.modalcontainer7}>
-        <TouchableOpacity style={styles.modaltouch}>
-            <Text style={{color:'#888'}}>Don't have an account?</Text>
-            <TouchableOpacity style={styles.modaltouch1}>
-            <Text style={styles.modaltxt2}>join</Text>
-            </TouchableOpacity>
-        </TouchableOpacity>
-         </View>
-        </Modal>
-        
-        <Join/>
-        
 
+    
+    
+      <Modal visible={modalVisible}>
+        <SafeAreaView style={styles.nav}>
+          <TouchableOpacity
+            style={styles.navBtn}
+            onPress={() => setSignInModal(true)}>
+            <Text style={styles.navText}>SignIn</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navBtn}
+            onPress={() => setSignInModal(false)}>
+            <Text style={styles.navText}>Join</Text>
+          </TouchableOpacity>
+          {/* <View>
+          <TouchableOpacity
+            style={styles.navBtn2}
+            onPress={() => setModalVisible(false)}>
+            <Image style={styles.img}
+              source={require
+              ('./imagees1/cross.png')}
+            />
+          </TouchableOpacity>
+          </View> */}
+        </SafeAreaView>
+        {signInModal ? <Signup /> : <Join />}
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -378,6 +355,27 @@ const styles = StyleSheet.create({
     {
         marginHorizontal:20
     },
+    // img:
+    // {
+    //   position:'absolute'
+    // },
+    navText:
+    {
+      fontSize:20
+    },
+    nav:
+    {
+      flexDirection:'row',
+      marginHorizontal:30,
+    },
+    navBtn:
+    {
+      marginRight:190
+    },
+    // navBtn2:
+    // {
+    //   marginRight:40
+    // }
     
 
 });

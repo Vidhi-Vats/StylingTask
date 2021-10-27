@@ -24,8 +24,9 @@ function App() {
     <Tab.Navigator
     screenOptions={{
       tabBarInactiveTintColor: "#dc143c" ,
-      tabBarActiveTintColor: "#888"
-    }}>
+      tabBarActiveTintColor: "#888",
+    }}
+    initialRouteName='Account'>
       <Tab.Screen name="Home" component={Homescreen} 
       options={{
       tabBarIcon:()=>(
@@ -52,7 +53,8 @@ function App() {
       )
       }}
       /> 
-      <Tab.Screen name="Account" component={Account}
+      <Tab.Screen 
+      name="Account" component={Account}
       options={{
         headerTitle:'My Application',
         title:'Account',
