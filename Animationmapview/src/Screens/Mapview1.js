@@ -5,7 +5,7 @@ StyleSheet,
 Dimensions,
 Image, 
 } from 'react-native'
-import MapView, { Marker,Polyline } from 'react-native-maps'
+import MapView, { Marker} from 'react-native-maps'
 import Geolocation from '@react-native-community/geolocation';
 
 // If you click on map then it gives info about latitude and longitude
@@ -15,7 +15,7 @@ const {width,height}=Dimensions.get('window');
 export default class Mapview1 extends Component {
 
             state={
-                value:0,
+                
                 region:{
                         latitude: 29.0970110,
                         longitude: 77.2730010,
@@ -49,10 +49,10 @@ export default class Mapview1 extends Component {
                     latitude:this.state.region.latitude,
                     longitude:this.state.region.longitude
                 }}>
-                <Image style={styles.mark} 
-                source={require('../Screens/images/map2.png')}/>
+                {/* <Image style={styles.mark} 
+                source={require('../Screens/images/map2.png')}/> */}
                 </Marker>
-                <Text style={styles.heading}>{this.state.value}</Text>
+                {/* <Text style={styles.heading}>{this.state.value}</Text> */}
                 </MapView>
             </View>
         )

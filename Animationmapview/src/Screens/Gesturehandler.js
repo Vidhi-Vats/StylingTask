@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
-import { Text, View,StyleSheet,Dimensions,Animated } from 'react-native';
+import { View,StyleSheet,Dimensions,
+    Animated,TouchableOpacity,Text,Modal} from 'react-native';
 import {PanGestureHandler} from 'react-native-gesture-handler';
+
 
 const{height,width}=Dimensions.get('window');
 
 export default class Gesturehandler extends Component {
+
+    state={
+        setvisible:false
+    }
+    
     translateX = new Animated.Value(0);
     translateY = new Animated.Value(0);
 
@@ -15,9 +22,10 @@ export default class Gesturehandler extends Component {
         }}],{useNativeDriver:true}
         );
 
+    
+
     render() {
-        let circleTransformation
-        circleTransformation={
+         const circleTransformation={
             transform:[
                 {
                     translateX:this.translateX
@@ -29,12 +37,14 @@ export default class Gesturehandler extends Component {
         }
         return (
             <View style={styles.container}>
+                <TouchableOpacity>
                 <PanGestureHandler 
                 onGestureEvent={this.handleGesture}>
                 <Animated.View style=
                 {[styles.circle,circleTransformation]}>
                 </Animated.View>  
                 </PanGestureHandler> 
+                </TouchableOpacity>
             </View>
         )
     }
