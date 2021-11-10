@@ -8,8 +8,6 @@
 
 ![ios3](https://user-images.githubusercontent.com/91823530/141075581-d67ae6ea-b659-43d7-befa-2d80c939cd6a.png)
 
-![ios4](https://user-images.githubusercontent.com/91823530/141075586-79af1ddc-5e14-4c95-8edf-3807e42ebb14.png)
-
 ![ios5](https://user-images.githubusercontent.com/91823530/141075596-8ff10a74-a43a-489a-b725-35c1f2a4cbc3.png)
 
 ![ios6](https://user-images.githubusercontent.com/91823530/141075605-d0763d50-b1a4-4a24-bc2d-0b80224d13b2.png)
