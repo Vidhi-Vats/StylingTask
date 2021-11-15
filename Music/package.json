@@ -22,7 +22,7 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",
     "react-native-track-player": "^2.1.2",
-    "react-native-video": "^5.2.0"
+    "react-native-video": "git+https://github.com/Shashank2406/react-native-video.git"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

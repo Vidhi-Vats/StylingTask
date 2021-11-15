@@ -8,14 +8,30 @@ import Video from 'react-native-video';
 const { height, width } = Dimensions.get('window')
 
 export default class Videosystem extends Component {
+
+    onLoad = (data) => {
+        
+        const {
+            audioTracks,
+            textTracks,
+            duration,
+            naturalSize
+        } = data
+        console.log(naturalSize)
+    }
+
+
+
     render() {
         return (
-            <SafeAreaView style={styles.maincontainer}>
-                <Video controls={true}
-                    muted={false}
-                    source={require('../../src/video2.mp4')}
+            <View style={styles.maincontainer}>
+            <Text>hi</Text>
+                <Video onLoad={this.onLoad}
+                    controls={true}
+                    muted={true}
+                    source={{uri:'https://sample-videos.com/video123/mp4/360/big_buck_bunny_360p_30mb.mp4'}}
                     style={styles.backgroundVideo} />
-            </SafeAreaView>
+            </View>
         )
     }
 }
@@ -23,13 +39,15 @@ const styles = StyleSheet.create({
     maincontainer:
     {
         flex: 1,
-        alignItems:'center',
-        justifyContent:'center'
+        justifyContent: 'center',
+        alignItems:'center'
+        
     },
     backgroundVideo:
     {
-        flex: 1,
-        height: 500,
-        width: width
+        height: '100%',
+        width: '100%',
+        position:'absolute'
+        
     }
 });

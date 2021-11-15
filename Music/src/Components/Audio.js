@@ -18,7 +18,8 @@ const setUpIfNecessary=async()=>{
             Capability.Pause,
             Capability.Stop,
             Capability.SkipToNext,
-            Capability.SkipToPrevious
+            Capability.SkipToPrevious,
+            Capability.SeekTo
         ],
         compactCapabilities:[
             Capability.Play,Capability.Pause

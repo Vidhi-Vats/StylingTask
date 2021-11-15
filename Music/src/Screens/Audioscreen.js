@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  ImageBackground
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import TrackPlayer, {
@@ -45,6 +46,7 @@ const Audioscreen = () => {
   const [trackArtwork, setTrackArtwork] = useState();
   const [trackTitle, setTrackTitle] = useState();
   const [trackArtist, setTrackArtist] = useState();
+  const [isSeeking, setIsSeeking] = useState(false);
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
     if (
@@ -58,19 +60,21 @@ const Audioscreen = () => {
       setTrackArtwork(artwork);
     }
   });
+  const slidingStarted = () => {
+    setIsSeeking(true);
+  };
 
   useEffect(() => {
     setUpIfNecessary();
   }, []);
 
   return (
-    <SafeAreaView style={styles.screenContainer}>
+    <View style={styles.screenContainer}>
+    <ImageBackground style={styles.backgroundimage}
+    source={require('../examples/music3.jpeg')}>
       <StatusBar barStyle={'light-content'} />
       <View style={styles.contentContainer}>
         <View style={styles.topBarContainer}>
-          <TouchableWithoutFeedback>
-            <Text style={styles.queueButton}>Queue</Text>
-          </TouchableWithoutFeedback>
         </View>
         <Image style={styles.artwork} source={{uri: `${trackArtwork}`}} />
         <Text style={styles.titleText}>{trackTitle}</Text>
@@ -84,7 +88,8 @@ const Audioscreen = () => {
           minimumTrackTintColor="#FFD479"
           maximumTrackTintColor="#FFFFFF"
           onSlidingComplete={async value => {
-            await TrackPlayer.seekTo(value);
+            await TrackPlayer.seekTo(value*progress.duration);
+
           }}
         />
         <View style={styles.progressLabelContainer}>
@@ -99,6 +104,10 @@ const Audioscreen = () => {
         </View>
       </View>
       <View style={styles.actionRowContainer}>
+      {/* <TouchableOpacity onPress={() => TrackPlayer.seekTo()}>
+          <Image source={require('../examples/slow.png')}
+          style={styles.secondaryActionButton}/>
+        </TouchableOpacity> */}
         <TouchableOpacity onPress={() => TrackPlayer.skipToPrevious()}>
           <Image source={require('../examples/back.png')}
           style={styles.secondaryActionButton}/>
@@ -117,16 +126,22 @@ const Audioscreen = () => {
         <Image source={require('../examples/next.png')}
           style={styles.secondaryActionButton}
         />
+        {/* </TouchableOpacity>
+        <TouchableOpacity onPress={() => TrackPlayer.seekTo(20)}>
+        <Image source={require('../examples/fast.png')}
+          style={styles.secondaryActionButton}
+        /> */}
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+      </ImageBackground>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    backgroundColor: '#212121',
+    // backgroundColor: '#212121',
     alignItems: 'center',
   },
   contentContainer: {
@@ -139,16 +154,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'flex-end',
   },
-  queueButton: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#FFD479',
-  },
   artwork: {
-    width: 240,
-    height: 240,
-    marginTop: 30,
+    width: 220,
+    height: 220,
+    marginTop: 80,
     backgroundColor: 'grey',
+    borderRadius:10
   },
   titleText: {
     fontSize: 18,
@@ -164,8 +175,8 @@ const styles = StyleSheet.create({
   progressContainer: {
     height: 40,
     width: 380,
-    marginTop: 25,
-    flexDirection: 'row',
+    marginTop: 50,
+    // flexDirection: 'row',
   },
   progressLabelContainer: {
     width: 370,
@@ -181,6 +192,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 100,
     justifyContent: 'space-between',
+    marginLeft:90
   },
   primaryActionButton: {
     color: '#FFD479',
@@ -188,6 +200,11 @@ const styles = StyleSheet.create({
   secondaryActionButton: {
     color: '#FFD479',
   },
+  backgroundimage:
+  {
+    flex:1,
+    width:450
+  }
 });
 
 export default Audioscreen;
